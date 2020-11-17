@@ -26,7 +26,7 @@ class GoogleSpider(scrapy.Spider):
     name = 'google'
     allowed_domains = ['api.scraperapi.com']
     custom_settings = {'ROBOTSTXT_OBEY': False, 'LOG_LEVEL': 'INFO',
-                       'CONCURRENT_REQUESTS_PER_DOMAIN': 10}
+                       'CONCURRENT_REQUESTS_PER_DOMAIN': 10, , 'RETRY_TIMES': 5}
 
     def start_requests(self):
         queries = ['scrapy', 'beautifulsoup'] ## Enter keywords here ['keyword1', 'keyword2', 'etc']
