@@ -17,6 +17,8 @@ Scraper API also offers autoparsing functionality free of charge for Google, so 
 
 This spider can be easily customised for your particular search requirements. In this case, it allows you to refine your search queries by specifying a  keyword, the geographic region, the language, the number of results, results from a particular domain, or even to only return safe results.
 
+Full tutorial can be found here: [Scraping Millions of Google SERPs The Easy Way (Python Scrapy Spider)](https://dev.to/iankerins/scraping-millions-of-google-serps-the-easy-way-python-scrapy-spider-4lol-temp-slug-8957520?preview=f73a488815c3cc75236c79ea4bfadbe21121c6edd4d54095bac81832859c6be9464bc9d34bcc32f2f82792d4e97af36ef1836db8b3d20a1009ddf5d1)
+
 ## Using the Google Spider
 
 Make sure Scrapy is installed:
