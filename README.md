@@ -15,6 +15,10 @@ This Google SERP spider uses Scraper API as the proxy solution. Scraper API has 
 
 Scraper API also offers autoparsing functionality free of charge for Google, so by adding `&autoparse=true` to the request the API returns all the SERP data in JSON format.
 
+To monitor the scraper, this scraper uses [ScrapeOps](https://scrapeops.io/). **Live demo here:** [ScrapeOps Demo](https://scrapeops.io/app/login/demo)
+
+![ScrapeOps Dashboard](https://scrapeops.io/assets/images/scrapeops-promo-286a59166d9f41db1c195f619aa36a06.png)
+
 This spider can be easily customised for your particular search requirements. In this case, it allows you to refine your search queries by specifying a  keyword, the geographic region, the language, the number of results, results from a particular domain, or even to only return safe results.
 
 Full tutorial can be found here: [Scraping Millions of Google SERPs The Easy Way (Python Scrapy Spider)](https://dev.to/iankerins/scraping-millions-of-google-serps-the-easy-way-python-scrapy-spider-4lol-temp-slug-8957520?preview=f73a488815c3cc75236c79ea4bfadbe21121c6edd4d54095bac81832859c6be9464bc9d34bcc32f2f82792d4e97af36ef1836db8b3d20a1009ddf5d1)
@@ -33,6 +37,7 @@ Set the keywords you want to search in Google.
 queries = ['scrapy', 'beautifulsoup']
 ```
 
+### Setting Up ScraperAPI
 Signup to [Scraper API](https://www.scraperapi.com/signup) and get your free API key that allows you to scrape 1,000 pages per month for free. Enter your API key into the API variable:
 
 ```
@@ -61,6 +66,37 @@ We should also set `RETRY_TIMES` to tell Scrapy to retry any failed requests (to
 # RANDOMIZE_DOWNLOAD_DELAY
 ```
 
+### Integrating ScrapeOps
+[ScrapeOps](https://scrapeops.io/) is already integrated into the scraper via the `settings.py` file. However, to use it you must:
+
+Install the [ScrapeOps Scrapy SDK](https://github.com/ScrapeOps/scrapeops-scrapy-sdk) on your machine.
+
+```
+pip install scrapeops-scrapy
+```
+
+And sign up for a [free ScrapeOps account here](https://scrapeops.io/app/register) so you can insert your **API Key** into the `settings.py` file:
+
+```
+    ## settings.py
+    
+    ## Add Your ScrapeOps API key
+    SCRAPEOPS_API_KEY = 'YOUR_API_KEY'
+    
+    ## Add In The ScrapeOps Extension
+    EXTENSIONS = {
+     'scrapeops_scrapy.extension.ScrapeOpsMonitor': 500, 
+    }
+    
+    ## Update The Download Middlewares
+    DOWNLOADER_MIDDLEWARES = { 
+	'scrapeops_scrapy.middleware.retry.RetryMiddleware': 550, 
+	'scrapy.downloadermiddlewares.retry.RetryMiddleware': None, 
+    }
+```
+From there, our scraping stats will be automatically logged and automatically shipped to our dashboard.
+
+### Running The Spider
 To run the spider, use:
 
 ```
